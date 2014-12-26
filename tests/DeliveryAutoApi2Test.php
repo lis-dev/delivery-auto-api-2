@@ -129,4 +129,12 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 		$result = $this->da->getTariffCategory();
 		$this->assertTrue($result['status']);
 	}
+	
+	/**
+	 * Test GetDeliveryScheme
+	 */
+	function testGetDeliveryScheme() {
+		$result = $this->da->getDeliveryScheme();
+		$this->assertTrue($result['status']);
+	}
 }

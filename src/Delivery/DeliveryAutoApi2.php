@@ -310,4 +310,13 @@ class DeliveryAutoApi2 {
 	function getTariffCategory() {
 		return $this->request('Public', 'GetTariffCategory');
 	}
+	
+	/**
+	 * GetDeliveryScheme
+	 * 
+	 * @return mixed
+	 */
+	function getDeliveryScheme() {
+		return $this->request('Public', 'GetDeliveryScheme');
+	}
 }
