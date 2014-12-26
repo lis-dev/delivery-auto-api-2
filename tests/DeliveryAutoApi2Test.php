@@ -95,4 +95,13 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($result['status']);
 	}
 	*/
+	
+	/**
+	 * Test GetReceiptDetails
+	 */
+	function testGetReceiptDetails() {
+		// Random params
+		$result = $this->da->getReceiptDetails('2130071495');
+		$this->assertTrue($result['status']);
+	}
 }

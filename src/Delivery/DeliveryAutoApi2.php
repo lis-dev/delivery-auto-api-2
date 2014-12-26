@@ -255,4 +255,16 @@ class DeliveryAutoApi2 {
 		));
 	}
 	*/
+	
+	/**
+	 * GetReceiptDetails
+	 * 
+	 * @param string $number
+	 * @return mixed
+	 */
+	function getReceiptDetails($number) {
+		return $this->request('Public', 'GetReceiptDetails', array(
+			'number' => $number,
+		));
+	}
 }
