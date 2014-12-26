@@ -118,8 +118,15 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 	 * Test GetDopUslugiClassification
 	 */
 	function testGetDopUslugiClassification() {
-		// Random params, IDs from manual
 		$result = $this->da->getDopUslugiClassification();
+		$this->assertTrue($result['status']);
+	}
+	
+	/**
+	 * Test GetTariffCategory
+	 */
+	function testGetTariffCategory() {
+		$result = $this->da->getTariffCategory();
 		$this->assertTrue($result['status']);
 	}
 }

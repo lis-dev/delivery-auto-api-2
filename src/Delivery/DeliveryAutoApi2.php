@@ -301,4 +301,13 @@ class DeliveryAutoApi2 {
 			'currency' => $currency,
 		));
 	}
+	
+	/**
+	 * GetTariffCategory
+	 * 
+	 * @return mixed
+	 */
+	function getTariffCategory() {
+		return $this->request('Public', 'GetTariffCategory');
+	}
 }
