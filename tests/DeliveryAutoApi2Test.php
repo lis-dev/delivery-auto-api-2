@@ -76,4 +76,13 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 		$result = $this->da->getWarehousesInfo('1c828aa6-70c8-e211-9902-00155d037919');
 		$this->assertTrue($result['status']);
 	}
+	
+	/**
+	 * Test GetFindWarehouses
+	 */
+	function testGetFindWarehouses() {
+		// Random params, get first 5 warehouses
+		$result = $this->da->getFindWarehouses(5, 33.1150260000, 48.6727020000, TRUE);
+		$this->assertTrue($result['status']);
+	}
 }

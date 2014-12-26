@@ -225,4 +225,22 @@ class DeliveryAutoApi2 {
 			'WarehousesId' => $warehousesId
 		));
 	}
+	
+	/**
+	 * GetFindWarehouses
+	 * 
+	 * @param int $count
+	 * @param string $longitude
+	 * @param string $latitude
+	 * @param string $includeRegionalCenters
+	 * @return mixed
+	 */
+	function getFindWarehouses($count, $longitude, $latitude, $includeRegionalCenters) {
+		return $this->request('Public', 'GetFindWarehouses', array(
+			'count' => $count,
+			'Longitude' => $longitude,
+			'Latitude' => $latitude,
+			'includeRegionalCenters' => $includeRegionalCenters ? 'true' : 'false',
+		));
+	}
 }
