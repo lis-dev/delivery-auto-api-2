@@ -289,4 +289,16 @@ class DeliveryAutoApi2 {
 			'currency' => $currency,
 		));
 	}
+	
+	/**
+	 * GetDopUslugiClassification
+	 * 
+	 * @param string $currency Currency ID, 100000000 it's hrn
+	 * @return mixed
+	 */
+	function getDopUslugiClassification($currency = 100000000) {
+		return $this->request('Public', 'GetDopUslugiClassification', array(
+			'currency' => $currency,
+		));
+	}
 }

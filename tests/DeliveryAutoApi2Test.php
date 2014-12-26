@@ -113,4 +113,13 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 		$result = $this->da->getDateArrival('4fc948a7-3729-e311-8b0d-00155d037960', '1e8e7257-a82a-e311-8b0d-00155d037960', '2014-12-28');
 		$this->assertTrue($result['status']);
 	}
+	
+	/**
+	 * Test GetDopUslugiClassification
+	 */
+	function testGetDopUslugiClassification() {
+		// Random params, IDs from manual
+		$result = $this->da->getDopUslugiClassification();
+		$this->assertTrue($result['status']);
+	}
 }
