@@ -184,7 +184,7 @@ class DeliveryAutoApi2 {
 	/**
 	 * GetRegionList
 	 * 
-	 * @return array
+	 * @return mixed
 	 */
 	function getRegionList() {
 		return $this->request('Public', 'GetRegionList');
@@ -193,7 +193,7 @@ class DeliveryAutoApi2 {
 	/**
 	 * GetAreasList
 	 * 
-	 * @return array
+	 * @return mixed
 	 */
 	function getAreasList() {
 		return $this->request('Public', 'GetAreasList');
@@ -205,12 +205,24 @@ class DeliveryAutoApi2 {
 	 * @param string $includeRegionalCenters Show offices
 	 * @param string $cityId ID of the city
 	 * @param string $regionId ID of the region
-	 * @return array
+	 * @return mixed
 	 */
 	function getWarehousesList($includeRegionalCenters = FALSE, $cityId = NULL, $regionId = NULL) {
 		$params['includeRegionalCenters'] = $includeRegionalCenters ? 'true' : 'false';
 		$cityId AND $params['cityId'] = $cityId;
 		$regionId AND $params['regionId'] = $regionId;
 		return $this->request('Public', 'GetWarehousesList', $params);
+	}
+	
+	/**
+	 * GetWarehousesInfo
+	 * 
+	 * @param string $warehousesId
+	 * @return mixed
+	 */
+	function getWarehousesInfo($warehousesId) {
+		return $this->request('Public', 'GetWarehousesInfo', array(
+			'WarehousesId' => $warehousesId
+		));
 	}
 }
