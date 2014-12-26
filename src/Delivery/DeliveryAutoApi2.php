@@ -180,4 +180,37 @@ class DeliveryAutoApi2 {
 	function execute() {
 		return $this->request($this->model, $this->method, $this->params);
 	}
+	
+	/**
+	 * GetRegionList
+	 * 
+	 * @return array
+	 */
+	function getRegionList() {
+		return $this->request('Public', 'GetRegionList');
+	}
+	
+	/**
+	 * GetAreasList
+	 * 
+	 * @return array
+	 */
+	function getAreasList() {
+		return $this->request('Public', 'GetAreasList');
+	}
+	
+	/**
+	 * GetWarehousesList
+	 * 
+	 * @param string $includeRegionalCenters Show offices
+	 * @param string $cityId ID of the city
+	 * @param string $regionId ID of the region
+	 * @return array
+	 */
+	function getWarehousesList($includeRegionalCenters = FALSE, $cityId = NULL, $regionId = NULL) {
+		$params['includeRegionalCenters'] = $includeRegionalCenters ? 'true' : 'false';
+		$cityId AND $params['cityId'] = $cityId;
+		$regionId AND $params['regionId'] = $regionId;
+		return $this->request('Public', 'GetWarehousesList', $params);
+	}
 }
