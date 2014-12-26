@@ -243,4 +243,16 @@ class DeliveryAutoApi2 {
 			'includeRegionalCenters' => $includeRegionalCenters ? 'true' : 'false',
 		));
 	}
+	
+	/**
+	 * GetWarehousesListInDetail
+	 * 
+	 * @param string $cityId
+	 * @return mixed
+	 */
+	function getWarehousesListInDetail($cityId) {
+		return $this->request('Public', 'GetWarehousesListInDetail', array(
+			'CityId' => $cityId,
+		));
+	}
 }
