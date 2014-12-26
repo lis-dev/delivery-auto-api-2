@@ -267,4 +267,26 @@ class DeliveryAutoApi2 {
 			'number' => $number,
 		));
 	}
+	
+	/**
+	 * Get date of delivery by cities ID and date of shipping
+	 * 
+	 * @param string $areasSendId City Sender ID
+	 * @param string $areasResiveId City Receiver ID
+	 * @param string $dateSend Date format 2014-06-05T09:54:20
+	 * @param string $warehouseSendId Warehouse Sender ID
+	 * @param string $warehouseResiveId Warehouse Receiver ID
+	 * @param string $currency Currency ID, 100000000 it's hrn
+	 * @return mixed
+	 */
+	function getDateArrival($areasSendId, $areasResiveId, $dateSend, $warehouseSendId = NULL, $warehouseResiveId = NULL, $currency = 100000000) {
+		return $this->request('Public', 'GetDateArrival', array(
+			'areasSendId' => $areasSendId,
+			'areasResiveId' => $areasResiveId,
+			'dateSend' => $dateSend,
+			'warehouseSendId' => $warehouseSendId,
+			'warehouseResiveId' => $warehouseResiveId,
+			'currency' => $currency,
+		));
+	}
 }
