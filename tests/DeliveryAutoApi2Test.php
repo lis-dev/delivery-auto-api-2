@@ -88,10 +88,11 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 	
 	/**
 	 * Test GetWarehousesListInDetail
-	 */
+	 * TODO Uncomment when API method will be repeared (now is 404 error)
 	function testGetWarehousesListInDetail() {
-		// Random params, get first 5 warehouses
-		$result = $this->da->getWarehousesListInDetail('07b83b8d-3e83-e211-b3e2-00155d037919');
+		// Random params
+		$result = $this->da->getWarehousesListInDetail('c7ae6f68-3529-e311-8b0d-00155d037960');
 		$this->assertTrue($result['status']);
 	}
+	*/
 }

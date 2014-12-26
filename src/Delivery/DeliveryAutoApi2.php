@@ -246,13 +246,13 @@ class DeliveryAutoApi2 {
 	
 	/**
 	 * GetWarehousesListInDetail
-	 * 
+	 * TODO Uncomment when API method will be repeared (now is 404 error) 
 	 * @param string $cityId
 	 * @return mixed
-	 */
 	function getWarehousesListInDetail($cityId) {
 		return $this->request('Public', 'GetWarehousesListInDetail', array(
 			'CityId' => $cityId,
 		));
 	}
+	*/
 }
