@@ -117,16 +117,28 @@ class DeliveryAutoApi2 {
 	 * 
 	 * @param string $model Model name
 	 * @param string $method Method name
+	 * @param bool $curl Use curl for request
 	 * @param array $params Required params
 	 */
-	private function request($model, $method, $params = NULL) {
+	private function request($model, $method, $params = NULL, $curl = FALSE) {
 		// Get json result
 		$params['culture'] = $this->culture;
-		$uri_part = '';
-		foreach($params as $value => $param) {
-			$uri_part .= $value.'='.$param.'&';
+		$url = 'http://www.delivery-auto.com.ua/api/v2';
+		if ($curl) {
+			$ch = curl_init($url.'/'.$model.'/'.$method);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			// curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+			$result = curl_exec($ch);
+			curl_close($ch);
+		} else {
+			$uri_part = http_build_query($params);
+			$result = file_get_contents($url.'/'.$model.'/'.$method.'?'.$uri_part);
 		}
-		$result = file_get_contents('http://www.delivery-auto.com.ua/api/'.$model.'/'.$method.'?'.$uri_part);
+		
 		return $this->prepare($result);
 	}
 
@@ -319,4 +331,57 @@ class DeliveryAutoApi2 {
 	function getDeliveryScheme() {
 		return $this->request('Public', 'GetDeliveryScheme');
 	}
+	
+	/**
+	 * Calculate price of shipping
+	 * 
+	 * @param array $params Params for shipping. Required fields:
+	 *  areasSendId => string, areasResiveId => string, warehouseSendId => string, warehouseResiveId => string, InsuranceValue => float,
+	 *  dateSend => string (format 13.06.2014), deliveryScheme => int, 
+	 *  category => array(array(
+	 *    categoryId => string, countPlace => int, helf => int, size => int
+	 *  ))
+	 * 	 
+	 * @return mixed
+	 */
+	function postReceiptCalculate($params) {
+		return $this->request('Public', 'PostReceiptCalculate', $params, TRUE);
+	}
+	
+	/**
+	 * Calculate price of shipping (simplest method. only required fields)
+	 * 
+	 * @param string $areasSendId Sender City ID
+	 * @param string $areasResiveId Recipient City ID
+	 * @param string $warehouseSendId Sender Warehouse ID
+	 * @param string $warehouseResiveId Recipient Warehouse ID
+	 * @param float $InsuranceValue Insurance value for parcel, price of goods
+	 * @param string $dateSend Date of shipping, format 13.06.2014
+	 * @param int $countPlace Count of places
+	 * @param ing $weight Weight
+	 * @param string $volume Size at m^3
+	 * 
+	 * @return mixed
+	 */
+	function postReceiptCalculateSimple($areasSendId, $areasResiveId, $warehouseSendId, $warehouseResiveId,
+		$InsuranceValue, $dateSend, $countPlace, $weight, $volume) {
+		return $this->postReceiptCalculate(array(
+			'areasSendId' => $areasSendId,
+			'areasResiveId' => $areasResiveId,
+			'warehouseSendId' => $warehouseSendId,
+			'warehouseResiveId' => $warehouseResiveId,
+			'InsuranceValue' => (float) $InsuranceValue,
+			'dateSend' => $dateSend,
+			'deliveryScheme' =>  2,
+			'category' => array(
+				array(
+					'categoryId' => "00000000-0000-0000-0000-000000000000",
+					'countPlace' => $countPlace,
+					'helf' => $weight,
+					'size' => $volume,
+				),
+			)
+		));
+	}
+	
 }

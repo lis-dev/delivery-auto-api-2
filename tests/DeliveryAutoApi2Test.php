@@ -137,4 +137,23 @@ class DeliveryAutoApi2Test extends \PHPUnit_Framework_TestCase
 		$result = $this->da->getDeliveryScheme();
 		$this->assertTrue($result['status']);
 	}
+	
+	/**
+	 * Test PostReceiptCalculateSimple
+	 */
+	function testPostReceiptCalculateSimple() {
+		// Random params, IDs from manual
+		$result = $this->da->postReceiptCalculateSimple(
+			'4fc948a7-3729-e311-8b0d-00155d037960',
+			'e3ac6f68-3529-e311-8b0d-00155d037960',
+			'1c828aa6-70c8-e211-9902-00155d037919',
+			'd908c5e1-b36b-e211-81e9-00155d012a15',
+			1000000,
+			'13.06.2014',
+			3,
+			1,
+			1
+		);
+		$this->assertTrue($result['status']);
+	}
 }
